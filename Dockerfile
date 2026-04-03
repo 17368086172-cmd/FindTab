@@ -1,16 +1,12 @@
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
-
-# 安装Python和构建工具，并创建python符号链接
-RUN apk add --no-cache python3 make g++ && \
-    ln -sf python3 /usr/bin/python
 
 # 复制package.json文件
 COPY backend/package*.json ./
 
-# 安装依赖
-RUN npm_config_python=/usr/bin/python npm install
+# 安装依赖 - node:20镜像已经包含了Python和构建工具
+RUN npm install
 
 # 复制后端代码
 COPY backend/ ./
