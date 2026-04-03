@@ -10,8 +10,7 @@ RUN apk add --no-cache python3 make g++ && \
 COPY backend/package*.json ./
 
 # 安装依赖
-RUN npm config set python /usr/bin/python && \
-    npm install
+RUN npm_config_python=/usr/bin/python npm install
 
 # 复制后端代码
 COPY backend/ ./
